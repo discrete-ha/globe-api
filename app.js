@@ -14,7 +14,6 @@ app.use(function(req, res, next) {
 });
 
 app.listen(app.get('port'), app.get('ip'), function () {
-
     console.log( "Globe api on " + app.get('ip') + ", server_port " + app.get('port')  );
 
 });
