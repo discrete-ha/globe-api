@@ -6,20 +6,19 @@
 <body>
 'Welcome!'
 <script type="text/javascript">
-	var utag_data = {location:"tokyo"}
+var utag_data = {
+  location : 1006
+}
 </script>
+
+<!-- スクリプトを非同期的に読み込み中 -->
 <script type="text/javascript">
-	(function(a,b,c,d){
-		a='//tags.tiqcdn.com/utag/drights/main/prod/utag.js';
-		b=document;
-		c='script';
-		d=b.createElement(c);
-		d.src=a;
-		d.type='text/java'+c;
-		d.async=true;
-		a=b.getElementsByTagName(c)[0];
-		a.parentNode.insertBefore(d,a);
-	})();
+    (function(a,b,c,d){
+    a='//tags.tiqcdn.com/utag/drights/main/dev/utag.js';
+    b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
+    a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+    })();
 </script>
+
 </body>
 </html>
