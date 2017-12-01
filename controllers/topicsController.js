@@ -90,6 +90,7 @@ let TwitterController = function(req, res){
 		});
 
 		return {
+			status:200,
 			topics:ret,
 			location:location,
 			totalPoint:totalPoint
