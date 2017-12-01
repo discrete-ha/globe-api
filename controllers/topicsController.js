@@ -2,6 +2,16 @@ let commonWords = require('../common_words.json');
 
 let TwitterController = function(req, res){
 
+	let appid = process.env.sendbox_appid || require(process.cwd()+'/config.json').appid;
+	let cliendAppid = req.params.appid;
+	if (appid !== cliendAppid) {
+		var err = {
+			status: 401,
+			message: "An App ID with Identifier '" + cliendAppid + "' is not available'"
+		};
+		return res.send(err);
+	}
+
 	let Twitter = require('twitter');
 	let TwitterConfig = {
 			consumer_key: process.env.consumer_key,
@@ -97,7 +107,7 @@ let TwitterController = function(req, res){
 						res.send(err);	
 					}else{
 						let ret = handleKeywords(result[0].trends, result[0].locations[0].name);
-						res.send(ret);
+						return res.send(ret);
 					}
 				});
 			}
