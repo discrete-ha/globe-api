@@ -1,7 +1,7 @@
 let commonWords = require('../common_words.json');
 
 let TwitterController = function(req, res){
-
+	
 	let appid = process.env.sendbox_appid || require(process.cwd()+'/config.json').appid;
 	let cliendAppid = req.params.appid;
 	if (appid !== cliendAppid) {
