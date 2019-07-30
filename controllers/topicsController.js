@@ -104,12 +104,14 @@ let TwitterController = function(req, res){
 								return res.send(err);	
 							}else{
 								let ret = handleKeywords(result[0].trends, result[0].locations[0].name);
-								topicsModel.set(cacheKey, JSON.stringify(ret) );								
+								topicsModel.set(cacheKey, JSON.stringify(ret));
+								ret = {...ret, cached: false}
 								return res.send(ret);
 							}
 						});
 					}else{
-						return res.send(JSON.parse(val));
+						let ret = {...JSON.parse(val), cached: true};
+						return res.send(ret);
 					}
 				});
 			}
