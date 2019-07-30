@@ -2,9 +2,7 @@ const express = require('express');
 const app = express();
 const path    = require("path");
 
-app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 8080);
-app.set('ip', process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1');
-
+app.set('port', process.env.PORT || 5000);
 app.get('/', function (req, res) { res.sendFile(path.join(__dirname+'/index.html'));});
 
 var topics = require('./routes/topics');
@@ -16,6 +14,6 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-app.listen(app.get('port'), app.get('ip'), function () {
+app.listen(app.get('port'), function () {
     console.log( "Globe api on " + app.get('ip') + ", server_port " + app.get('port')  );
 });

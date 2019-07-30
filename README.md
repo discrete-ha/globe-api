@@ -2,11 +2,6 @@
 ----
   Realtime topics based on the location
 
-* **URL**
-  -Dev
-  http://api-globe.7e14.starter-us-west-2.openshiftapps.com/
-
-
 * **Endpoint:**
   /topics/:appid/:lat/:long
 

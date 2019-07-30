@@ -41,12 +41,12 @@ let TwitterController = function(req, res){
 			let contents = [];
 			if (!error) {
 				try{
-					callback(null, location[0]);
+					return callback(null, location[0]);
 				}catch(e){
-					callback(e, null);
+					return callback(e, null);
 				}
 			}else{
-				callback(JSON.stringify(error), null);
+				return callback(JSON.stringify(error), null);
 			}
 		});
 	}
@@ -63,12 +63,12 @@ let TwitterController = function(req, res){
 			let contents = [];
 			if (!error) {
 				try{
-					callback(null, tweets);
+					return callback(null, tweets);
 				}catch(e){
-					callback(e, null);
+					return callback(e, null);
 				}
 			}else{
-				callback(JSON.stringify(error), null);
+				return callback(JSON.stringify(error), null);
 			}
 		});
 	}
@@ -105,7 +105,7 @@ let TwitterController = function(req, res){
 			}else{
 				getKeywords(location, function(err, result){
 					if (err) {
-						res.send(err);	
+						return res.send(err);	
 					}else{
 						let ret = handleKeywords(result[0].trends, result[0].locations[0].name);
 						return res.send(ret);
