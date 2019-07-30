@@ -1,8 +1,10 @@
+require('dotenv').config();
 let commonWords = require('../common_words.json');
+let topicsModel = require('../models/topicsModel');
 
 let TwitterController = function(req, res){
-	console.log(process.env);
-	let appid = process.env.appid || require(process.cwd()+'/config.json').appid;
+	
+	let appid = process.env.appid;
 	let cliendAppid = req.params.appid;
 	if (appid !== cliendAppid) {
 		var err = {
@@ -19,13 +21,6 @@ let TwitterController = function(req, res){
 			access_token_key: process.env.access_token_key,
 			access_token_secret: process.env.access_token_secret
 		};
-
-	if (!process.env.consumer_key || 
-		!process.env.consumer_secret || 
-		!process.env.access_token_key || 
-		!process.env.access_token_secret ) {
-		TwitterConfig = require(process.cwd()+'/config.json').twitter
-	}
 
 	let twitterClient = new Twitter(TwitterConfig);
 
@@ -52,7 +47,6 @@ let TwitterController = function(req, res){
 	}
 
 	let getKeywords = function(location, callback){
-
 		let params = {
 			id:location.woeid
 		};
@@ -98,17 +92,24 @@ let TwitterController = function(req, res){
 	}
 
 	let initData = function(){
-
 		getAvailableWoeid(req.params.lat, req.params.long, function(err, location){
 			if (err) {
-				res.send(err);	
+				return res.send(err);	
 			}else{
-				getKeywords(location, function(err, result){
-					if (err) {
-						return res.send(err);	
+				var cacheKey = (location.woeid).toString();
+				topicsModel.get(cacheKey, function(err, val){
+					if (val === null || err !== null) {
+						getKeywords(location, function(err, result){
+							if (err) {
+								return res.send(err);	
+							}else{
+								let ret = handleKeywords(result[0].trends, result[0].locations[0].name);
+								topicsModel.set(cacheKey, JSON.stringify(ret) );								
+								return res.send(ret);
+							}
+						});
 					}else{
-						let ret = handleKeywords(result[0].trends, result[0].locations[0].name);
-						return res.send(ret);
+						return res.send(JSON.parse(val));
 					}
 				});
 			}
