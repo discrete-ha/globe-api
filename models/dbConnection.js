@@ -7,14 +7,9 @@ var client = memjs.Client.create(process.env.MEMCACHEDCLOUD_SERVERS, {
 
 module.exports = function () {
   return {
-  //   getConnection: function () {
-  //     return memjs.Client.create(process.env.MEMCACHEDCLOUD_SERVERS, {
-		// 	username: process.env.MEMCACHEDCLOUD_USERNAME,
-		// 	password: process.env.MEMCACHEDCLOUD_PASSWORD
-		// });
-  //   },
+
     set: function (key, value) {
-		client.set(key, value, {expires:600}, function(err, val) {
+		client.set(key, value, {expires:120}, function(err, val) {
 			if (err) {
 				console.log("err",err);
 			}
