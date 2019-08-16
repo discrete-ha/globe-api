@@ -3,8 +3,19 @@
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<title>Air-flare API!</title>
+	<script type="text/javascript">
+		document.addEventListener("DOMContentLoaded", function(event) {
+            closeApp = function() {
+                webkit.messageHandlers.callbackHandler.postMessage("close");
+            };
+        });
+	</script>
 </head>
 <body>
-'Hi API!'
+
+	<div style="float: right;font-size: 20px;" onclick="closeApp()">
+		CLOSE
+	</div>
+	<H2>'Hi API!'</H2>
 </body>
 </html>
