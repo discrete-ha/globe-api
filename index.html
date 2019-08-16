@@ -9,6 +9,14 @@
                 webkit.messageHandlers.callbackHandler.postMessage("close");
             };
         });
+		var url = "https://spacely.co.jp";
+        function openUrl(){
+			window.open( url );
+        }
+
+        function openUrlNew(){
+			window.open( url , '_blank');
+        }
 	</script>
 </head>
 <body>
@@ -17,5 +25,13 @@
 		CLOSE
 	</div>
 	<H2>'Hi API!'</H2>
+	<a href="https://spacely.co.jp" style="text-decoration: none;color:#000" target="_blank">Open HTML TAG New Tap</a>
+	<a href="https://spacely.co.jp" style="text-decoration: none;color:#000">Open HTML TAG Same Tap</a>
+	<div onclick="openUrlNew()">
+		Open JS New Tap
+	</div>
+	<div onclick="openUrl()">
+		Open JS Same Tap
+	</div>
 </body>
 </html>
